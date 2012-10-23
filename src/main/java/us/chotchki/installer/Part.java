@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 public abstract class Part implements Comparable<Part> {
 	private static Logger log = LoggerFactory.getLogger(Part.class);
+	private static final String installTable = "webCivInstaller".toLowerCase(); 
 	protected final ScriptRunner scriptRunner;
 	protected final SqlRunner sqlRunner;
 	
@@ -33,7 +34,7 @@ public abstract class Part implements Comparable<Part> {
 	}
 	
 	public boolean isInstalled() throws Exception {
-		Map<String, Object> row = this.sqlRunner.selectOne("SELECT count(*) as count FROM \"pgGalleryInstaller\" WHERE \"partName\" = ? and installed = true", this.getClass().getSimpleName());
+		Map<String, Object> row = this.sqlRunner.selectOne("SELECT count(*) as count FROM " + installTable + " WHERE partName = ? and installed = true", this.getClass().getSimpleName());
 		long count = (Long) row.get("COUNT");
 		if(count == 0) {
 			return false;
@@ -66,11 +67,11 @@ public abstract class Part implements Comparable<Part> {
 	}
 	
 	protected void preinstall() throws Exception {
-		this.sqlRunner.delete("DELETE FROM \"pgGalleryInstaller\" WHERE \"partName\" = ?", this.getClass().getSimpleName());
-		this.sqlRunner.update("INSERT INTO \"pgGalleryInstaller\" (\"partName\") VALUES (?);", this.getClass().getSimpleName());
+		this.sqlRunner.delete("DELETE FROM " + installTable + " WHERE partName = ?", this.getClass().getSimpleName());
+		this.sqlRunner.update("INSERT INTO " + installTable + " (partName) VALUES (?);", this.getClass().getSimpleName());
 	}
 	
 	protected void postinstall() throws Exception {
-		this.sqlRunner.update("UPDATE \"pgGalleryInstaller\" SET installed = true WHERE \"partName\" = ? ", this.getClass().getSimpleName());
+		this.sqlRunner.update("UPDATE " + installTable + " SET installed = true WHERE partName = ? ", this.getClass().getSimpleName());
 	}
 }

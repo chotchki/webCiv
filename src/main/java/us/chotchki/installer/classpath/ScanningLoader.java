@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 public class ScanningLoader {
 	private static Logger log = LoggerFactory.getLogger(ScanningLoader.class);
 	
-	private static final String PACKAGE = "installer.parts";
+	private static final String PACKAGE = "us.chotchki.installer.parts";
 	
 	/**
 	 * Creates all the install parts in the proper dependency order.
