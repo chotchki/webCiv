@@ -57,7 +57,7 @@
 			<artifactId>mybatis</artifactId>
 			<version>3.1.1</version>
 		</dependency>
-		
+
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -69,6 +69,13 @@
 					<groupId>commons-logging</groupId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+
+		<!-- View -->
+		<dependency>
+			<groupId>org.sitemesh</groupId>
+			<artifactId>sitemesh</artifactId>
+			<version>3.0-alpha-2</version>
 		</dependency>
 	</dependencies>
 	<build>
