@@ -10,6 +10,7 @@ public class Slf4jPrintWriter extends PrintWriter {
 	private static Logger log = LoggerFactory.getLogger(Slf4jPrintWriter.class);
 	
 	private final boolean errorLevel;
+	private boolean writtenTo = false;
 	
 	private StringBuffer buffer = new StringBuffer(); 
 	
@@ -21,6 +22,7 @@ public class Slf4jPrintWriter extends PrintWriter {
 	@Override
 	public void print(Object obj) {
 		buffer.append(obj);
+		writtenTo = true;
 	}
 	
 	@Override
@@ -32,8 +34,13 @@ public class Slf4jPrintWriter extends PrintWriter {
 			log.debug(buffer.toString());
 		}
 		buffer = new StringBuffer();
+		writtenTo = true;
 	}
 	
 	@Override
 	public void flush() {}
+
+	public boolean wasWrittenTo() {
+		return writtenTo;
+	}
 }

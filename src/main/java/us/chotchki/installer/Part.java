@@ -5,6 +5,7 @@ import us.chotchki.installer.util.Slf4jPrintWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Map;
 
 import org.apache.ibatis.jdbc.ScriptRunner;
@@ -17,12 +18,14 @@ public abstract class Part implements Comparable<Part> {
 	private static final String installTable = "webCivInstaller".toLowerCase(); 
 	protected final ScriptRunner scriptRunner;
 	protected final SqlRunner sqlRunner;
+	protected final Slf4jPrintWriter errorWriter;
 	
 	public Part(Connection conn) {
 		scriptRunner = new ScriptRunner(conn);
 		scriptRunner.setSendFullScript(true);
 		scriptRunner.setLogWriter(new Slf4jPrintWriter(false));
-		scriptRunner.setErrorLogWriter(new Slf4jPrintWriter(true));
+		errorWriter = new Slf4jPrintWriter(true);
+		scriptRunner.setErrorLogWriter(errorWriter);
 		
 		sqlRunner = new SqlRunner(conn);
 	}
@@ -61,6 +64,10 @@ public abstract class Part implements Comparable<Part> {
 		
 		log.info("Running install script {}", loaderLocation);
 		scriptRunner.runScript(rdr);
+		
+		if(errorWriter.wasWrittenTo()){
+			throw new SQLException("The install part " + this.getClass().getName() + " failed.");
+		}
 		
 		log.info("Script Complete, updating status");
 		this.postinstall();
