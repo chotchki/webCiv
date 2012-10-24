@@ -12,7 +12,7 @@ import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.context.support.GenericWebApplicationContext;
-import org.springframework.web.filter.DelegatingFilterProxy;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import us.chotchki.installer.InstallerProcess;
@@ -38,6 +38,12 @@ public class WebCivStartup implements WebApplicationInitializer {
 		root.getEnvironment().setDefaultProfiles("embedded");
 
 		sc.addListener(new ContextLoaderListener(root));
+		
+		//Force UTF-8
+		CharacterEncodingFilter cf = new CharacterEncodingFilter();
+		cf.setEncoding("UTF-8");
+		cf.setForceEncoding(true);
+		sc.addFilter("characterEncodingFilter", cf).addMappingForUrlPatterns(null, false, "/*");
 
 		// Secures the application
 		//sc.addFilter("securityFilter", new DelegatingFilterProxy("springSecurityFilterChain")).addMappingForUrlPatterns(null, false, "/*");
