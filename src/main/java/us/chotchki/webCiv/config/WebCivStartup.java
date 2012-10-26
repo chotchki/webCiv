@@ -1,4 +1,4 @@
-package us.chotchki.webCiv;
+package us.chotchki.webCiv.config;
 
 import java.util.EnumSet;
 import java.util.Set;
