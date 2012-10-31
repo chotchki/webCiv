@@ -1,5 +1,9 @@
 <html>
+<head>
+</head>
 <body>
-<h1>This is a test</h1>
+	<div id="gameWindow">
+		<h1>Loading...</h1>
+	</div>
 </body>
 </html>
