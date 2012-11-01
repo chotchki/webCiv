@@ -53,8 +53,10 @@ public class WebCivStartup implements WebApplicationInitializer {
 		//sc.addFilter("securityFilter", new DelegatingFilterProxy("springSecurityFilterChain")).addMappingForUrlPatterns(null, false, "/*");
 
 		//Sitemesh Setup
-		FilterRegistration sitemeshReg = sc.addFilter("sitemesh", ConfigurableSiteMeshFilter.class);
-		sitemeshReg.addMappingForUrlPatterns(null, false, "/*");
+		FilterRegistration sitemeshReg = sc.addFilter("sitemesh3", ConfigurableSiteMeshFilter.class);
+		if(sitemeshReg != null){
+			sitemeshReg.addMappingForUrlPatterns(null, false, "/*");
+		}
 		
 		
 		// Handles requests into the application
