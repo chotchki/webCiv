@@ -56,6 +56,7 @@ public class WebCivStartup implements WebApplicationInitializer {
 		FilterRegistration sitemeshReg = sc.addFilter("sitemesh", ConfigurableSiteMeshFilter.class);
 		sitemeshReg.addMappingForUrlPatterns(null, false, "/*");
 		
+		
 		// Handles requests into the application
 		ServletRegistration.Dynamic appServlet = sc.addServlet("appServlet", new DispatcherServlet(new GenericWebApplicationContext()));
 		appServlet.setLoadOnStartup(1);
