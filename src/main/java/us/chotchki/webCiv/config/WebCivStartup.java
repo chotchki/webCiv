@@ -3,6 +3,7 @@ package us.chotchki.webCiv.config;
 import java.util.EnumSet;
 import java.util.Set;
 
+import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
@@ -43,10 +44,10 @@ public class WebCivStartup implements WebApplicationInitializer {
 		sc.addListener(new ContextLoaderListener(root));
 		
 		//Force UTF-8
-		CharacterEncodingFilter cf = new CharacterEncodingFilter();
-		cf.setEncoding("UTF-8");
-		cf.setForceEncoding(true);
-		sc.addFilter("characterEncodingFilter", cf).addMappingForUrlPatterns(null, false, "/*");
+		FilterRegistration charEncodingfilterReg = sc.addFilter("CharacterEncodingFilter", CharacterEncodingFilter.class);
+		charEncodingfilterReg.setInitParameter("encoding", "UTF-8");
+		charEncodingfilterReg.setInitParameter("forceEncoding", "true");
+		charEncodingfilterReg.addMappingForUrlPatterns(null, false, "/*");
 
 		// Secures the application
 		//sc.addFilter("securityFilter", new DelegatingFilterProxy("springSecurityFilterChain")).addMappingForUrlPatterns(null, false, "/*");
