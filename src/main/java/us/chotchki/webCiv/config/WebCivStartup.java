@@ -61,12 +61,14 @@ public class WebCivStartup implements WebApplicationInitializer {
 		
 		// Handles requests into the application
 		ServletRegistration.Dynamic appServlet = sc.addServlet("appServlet", new DispatcherServlet(new GenericWebApplicationContext()));
-		appServlet.setLoadOnStartup(1);
-		Set<String> mappingConflicts = appServlet.addMapping("/");
-		if (!mappingConflicts.isEmpty()) {
-			throw new IllegalStateException("'appServlet' could not be mapped to '/' due "
-					+ "to an existing mapping. This is a known issue under Tomcat versions "
-					+ "<= 7.0.14; see https://issues.apache.org/bugzilla/show_bug.cgi?id=51278");
+		if(appServlet != null){
+			appServlet.setLoadOnStartup(1);
+			Set<String> mappingConflicts = appServlet.addMapping("/");
+			if (!mappingConflicts.isEmpty()) {
+				throw new IllegalStateException("'appServlet' could not be mapped to '/' due "
+						+ "to an existing mapping. This is a known issue under Tomcat versions "
+						+ "<= 7.0.14; see https://issues.apache.org/bugzilla/show_bug.cgi?id=51278");
+			}
 		}
 		
 		//Force cookie use for sessions
