@@ -39,7 +39,6 @@ public class WebCivStartup implements WebApplicationInitializer {
 
 		AnnotationConfigWebApplicationContext root = new AnnotationConfigWebApplicationContext();
 		root.scan("us.chotchki.webCiv");
-		root.getEnvironment().setDefaultProfiles("embedded");
 
 		sc.addListener(new ContextLoaderListener(root));
 		
