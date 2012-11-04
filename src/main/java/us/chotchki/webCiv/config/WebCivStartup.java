@@ -62,7 +62,7 @@ public class WebCivStartup implements WebApplicationInitializer {
 		ServletRegistration.Dynamic appServlet = sc.addServlet("appServlet", new DispatcherServlet(new GenericWebApplicationContext()));
 		if(appServlet != null){
 			appServlet.setLoadOnStartup(1);
-			Set<String> mappingConflicts = appServlet.addMapping("/");
+			Set<String> mappingConflicts = appServlet.addMapping("/w");
 			if (!mappingConflicts.isEmpty()) {
 				throw new IllegalStateException("'appServlet' could not be mapped to '/' due "
 						+ "to an existing mapping. This is a known issue under Tomcat versions "
