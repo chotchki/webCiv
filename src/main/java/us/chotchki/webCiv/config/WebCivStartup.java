@@ -3,6 +3,7 @@ package us.chotchki.webCiv.config;
 import java.util.EnumSet;
 import java.util.Set;
 
+import javax.servlet.DispatcherType;
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -46,7 +47,7 @@ public class WebCivStartup implements WebApplicationInitializer {
 		FilterRegistration charEncodingfilterReg = sc.addFilter("CharacterEncodingFilter", CharacterEncodingFilter.class);
 		charEncodingfilterReg.setInitParameter("encoding", "UTF-8");
 		charEncodingfilterReg.setInitParameter("forceEncoding", "true");
-		charEncodingfilterReg.addMappingForUrlPatterns(null, false, "/*");
+		charEncodingfilterReg.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), false, "/*");
 
 		// Secures the application
 		//sc.addFilter("securityFilter", new DelegatingFilterProxy("springSecurityFilterChain")).addMappingForUrlPatterns(null, false, "/*");
@@ -54,7 +55,7 @@ public class WebCivStartup implements WebApplicationInitializer {
 		//Sitemesh Setup
 		FilterRegistration sitemeshReg = sc.addFilter("sitemesh3", ConfigurableSiteMeshFilter.class);
 		if(sitemeshReg != null){
-			sitemeshReg.addMappingForUrlPatterns(null, false, "/*");
+			sitemeshReg.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), false, "/*");
 		}
 		
 		
