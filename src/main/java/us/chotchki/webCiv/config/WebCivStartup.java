@@ -3,21 +3,17 @@ package us.chotchki.webCiv.config;
 import java.util.EnumSet;
 import java.util.Set;
 
-import javax.servlet.DispatcherType;
-import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 import javax.servlet.SessionTrackingMode;
 
-import org.sitemesh.config.ConfigurableSiteMeshFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.context.support.GenericWebApplicationContext;
-import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import us.chotchki.installer.InstallerProcess;
@@ -55,10 +51,10 @@ public class WebCivStartup implements WebApplicationInitializer {
 		//sc.addFilter("securityFilter", new DelegatingFilterProxy("springSecurityFilterChain")).addMappingForUrlPatterns(null, false, "/*");
 
 		//Sitemesh Setup
-		FilterRegistration.Dynamic sitemeshReg = sc.addFilter("sitemesh3", ConfigurableSiteMeshFilter.class);
-		if(sitemeshReg != null){
-			sitemeshReg.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), false, "/*");
-		}
+		//FilterRegistration.Dynamic sitemeshReg = sc.addFilter("sitemesh3", ConfigurableSiteMeshFilter.class);
+		//if(sitemeshReg != null){
+		//	sitemeshReg.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), false, "/*");
+		//}
 		
 		
 		// Handles requests into the application
