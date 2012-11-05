@@ -44,7 +44,7 @@ public class WebCivStartup implements WebApplicationInitializer {
 		sc.addListener(new ContextLoaderListener(root));
 		
 		//Force UTF-8
-		FilterRegistration charEncodingfilterReg = sc.addFilter("CharacterEncodingFilter", CharacterEncodingFilter.class);
+		FilterRegistration.Dynamic charEncodingfilterReg = sc.addFilter("CharacterEncodingFilter", CharacterEncodingFilter.class);
 		charEncodingfilterReg.setInitParameter("encoding", "UTF-8");
 		charEncodingfilterReg.setInitParameter("forceEncoding", "true");
 		charEncodingfilterReg.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), false, "/*");
@@ -53,7 +53,7 @@ public class WebCivStartup implements WebApplicationInitializer {
 		//sc.addFilter("securityFilter", new DelegatingFilterProxy("springSecurityFilterChain")).addMappingForUrlPatterns(null, false, "/*");
 
 		//Sitemesh Setup
-		FilterRegistration sitemeshReg = sc.addFilter("sitemesh3", ConfigurableSiteMeshFilter.class);
+		FilterRegistration.Dynamic sitemeshReg = sc.addFilter("sitemesh3", ConfigurableSiteMeshFilter.class);
 		if(sitemeshReg != null){
 			sitemeshReg.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), false, "/*");
 		}
