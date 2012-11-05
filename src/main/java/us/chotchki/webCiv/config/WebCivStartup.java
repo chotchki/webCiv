@@ -44,12 +44,12 @@ public class WebCivStartup implements WebApplicationInitializer {
 		sc.addListener(new ContextLoaderListener(root));
 		
 		//Force UTF-8
-		FilterRegistration.Dynamic charEncodingfilterReg = sc.addFilter("CharacterEncodingFilter", CharacterEncodingFilter.class);
-		if(charEncodingfilterReg != null){
-			charEncodingfilterReg.setInitParameter("encoding", "UTF-8");
-			charEncodingfilterReg.setInitParameter("forceEncoding", "true");
-			charEncodingfilterReg.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), false, "/*");
-		}
+		//FilterRegistration.Dynamic charEncodingfilterReg = sc.addFilter("CharacterEncodingFilter", CharacterEncodingFilter.class);
+		//if(charEncodingfilterReg != null){
+		//	charEncodingfilterReg.setInitParameter("encoding", "UTF-8");
+		//	charEncodingfilterReg.setInitParameter("forceEncoding", "true");
+		//	charEncodingfilterReg.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), false, "/*");
+		//}
 		
 		// Secures the application
 		//sc.addFilter("securityFilter", new DelegatingFilterProxy("springSecurityFilterChain")).addMappingForUrlPatterns(null, false, "/*");
