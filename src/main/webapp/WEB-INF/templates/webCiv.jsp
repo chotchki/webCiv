@@ -16,6 +16,7 @@
       }
     </style>
 	<link href="<c:url value="css/bootstrap.min.css" />" rel="stylesheet" />
+	<link rel="shortcut icon" href="<c:url value="img/favicon.ico"/>" />
 	
 	
 	<!-- Make IE work! -->
@@ -35,7 +36,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="<c:url value="/"/>">WebCiv</a>
+          <a class="brand" href="<c:url value="/"/>" >WebCiv</a>
           <p class="navbar-text pull-right">
               Logged in as <a href="#" class="navbar-link">Username</a>
 		  </p>
