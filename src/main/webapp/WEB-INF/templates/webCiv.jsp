@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,18 +29,28 @@
 	<sitemesh:write property="head" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="<c:url value="/"/>" >WebCiv</a>
-          <p class="navbar-text pull-right">
-              Logged in as <a href="#" class="navbar-link">Username</a>
-		  </p>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<a class="brand" href="<c:url value="/"/>" >WebCiv</a>
+				<sec:authorize access="hasRole('ROLE_ANONYMOUS')">
+					<p class="navbar-text pull-right">
+						<a href="<c:url value="/login" />" class="navbar-link">Register / Sign in</a>
+					</p>
+				</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
+					<p class="navbar-text pull-right">
+						Signed in as <sec:authentication property="principal.username" />
+					</p>
+					<p class="navbar-text pull-right">
+						<a href="<c:url value="/signout" />" class="navbar-link">Sign Out</a>
+					</p>
+				</sec:authorize>
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li><a href="<c:url value="/"/>" >Home</a></li>
