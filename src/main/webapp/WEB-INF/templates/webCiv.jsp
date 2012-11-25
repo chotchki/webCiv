@@ -38,7 +38,7 @@
 					<span class="icon-bar"></span>
 				</a>
 				<a class="brand" href="<c:url value="/"/>" >WebCiv</a>
-				<sec:authorize access="hasRole('ROLE_ANONYMOUS')">
+				<sec:authorize access="isAnonymous()">
 					<p class="navbar-text pull-right">
 						<a href="<c:url value="/login" />" class="navbar-link">Register / Sign in</a>
 					</p>

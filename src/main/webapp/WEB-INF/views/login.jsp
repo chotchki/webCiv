@@ -1,13 +1,34 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
+	<link type="text/css" rel="stylesheet" href="<c:url value="/css/auth-buttons.css" />" />
+	<script type="text/javascript">
+		require(["jquery"], function($){
+			$('#google').click(function(){
+				$('openid_identifier').val('https://www.google.com/accounts/o8/id');
+				
+			});
+		});
+	</script>
 </head>
 <body>
 	<div class="row-fluid">
 		<div class="span3 offset2">
+			<!-- <p><a class="btn-auth btn-facebook" href="#button">Sign in with <b>Facebook</b></a></p>
+			<p><a class="btn-auth btn-twitter" id="twitter" href="#">Sign in with <b>Twitter</b></a></p>-->
+			<form action="<c:url value="/j_spring_openid_security_check"/>" method="POST">
+				<input type="hidden" id="openid_identifier" name="openid_identifier" maxlength="255" />
+				<p><a class="btn-auth btn-google" id="google" href="#">Sign in with <b>Google</b></a></p>
+				<p><a class="btn-auth btn-github" id="github" href="#">Sign in with <b>GitHub</b></a></p>
+				<p><a class="btn-auth btn-yahoo" id="yahoo" href="#">Sign in with <b>Yahoo!</b></a></p>
+				<p><a class="btn-auth btn-windows" id="windows" href="#">Sign in with <b>Windows Live ID</b></a></p>
+			</form>
+			
+			<div style="text-align: center">
+				<h3>- Or -</h3>
+			</div>
 			<form action="<c:url value="/login/form"/>" method="POST">
     			<fieldset>
-    				<legend>Login</legend>
     				<label>Username</label>
     				<input type="text" placeholder="">
     				<label>Password</label>
@@ -17,10 +38,8 @@
     			</fieldset>
     		</form>
 		</div>
-		<div class="span2" style="text-align: center">
-			<h3>- Or -</h3>
-		</div>
-		<div class="span3">
+		
+		<div class="span3 offset1">
 			<h4>Register</h4>
 		</div>
 	</div>
