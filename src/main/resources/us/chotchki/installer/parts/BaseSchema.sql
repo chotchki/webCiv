@@ -1,6 +1,3 @@
---We'll drop this statement once we have stablized further 
-DROP SCHEMA webCiv CASCADE;
-
 CREATE SCHEMA webCiv;
 
 CREATE TABLE webciv.game (
