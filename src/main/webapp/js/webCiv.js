@@ -1,7 +1,8 @@
 require.config({
 	paths: {
 		jquery: 'http://code.jquery.com/jquery-latest',
-		bootstrap: 'bootstrap.min'
+		bootstrap: 'bootstrap.min',
+		gamequery: 'jquery.gamequery-0.7.0'
 	}
 });
 
