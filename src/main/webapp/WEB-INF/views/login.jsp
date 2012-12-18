@@ -26,8 +26,6 @@
 				<p><a class="btn-auth btn-yahoo" id="yahoo" href="#">Sign in with <b>Yahoo!</b></a></p>
 			</form>-->
 			
-			<p></p>
-			
 			<form action="<c:url value="/login/form"/>" method="POST">
     			<fieldset>
     				<legend>Login Below</legend>
