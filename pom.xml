@@ -98,6 +98,12 @@
 			<version>3.0-alpha-2</version>
 		</dependency>
 
+		<!-- JSON Mapping -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.11</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

@@ -20,17 +20,17 @@
 		<div class="span3 offset2">
 			<!-- <p><a class="btn-auth btn-facebook" href="#button">Sign in with <b>Facebook</b></a></p>
 			<p><a class="btn-auth btn-twitter" id="twitter" href="#">Sign in with <b>Twitter</b></a></p>-->
-			<form action="<c:url value="/j_spring_openid_security_check"/>" method="POST">
+			<!--<form action="<c:url value="/j_spring_openid_security_check"/>" method="POST">
 				<input type="hidden" id="openid_identifier" name="openid_identifier" maxlength="255" />
 				<p><a class="btn-auth btn-google" id="google" href="#">Sign in with <b>Google</b></a></p>
 				<p><a class="btn-auth btn-yahoo" id="yahoo" href="#">Sign in with <b>Yahoo!</b></a></p>
-			</form>
+			</form>-->
 			
 			<p></p>
 			
 			<form action="<c:url value="/login/form"/>" method="POST">
     			<fieldset>
-    				<legend>Or Login Below</legend>
+    				<legend>Login Below</legend>
     				<label>Username</label>
     				<input type="text" name=j_username" placeholder="">
     				<label>Password</label>
