@@ -104,6 +104,13 @@
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.11</version>
 		</dependency>
+		
+		<!-- Base64 Support -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.7</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
