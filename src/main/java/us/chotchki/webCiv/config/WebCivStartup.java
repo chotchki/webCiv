@@ -1,6 +1,9 @@
 package us.chotchki.webCiv.config;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.EnumSet;
+import java.util.Properties;
 import java.util.Set;
 
 import javax.servlet.FilterRegistration;
@@ -80,6 +83,23 @@ public class WebCivStartup implements WebApplicationInitializer {
 		
 		//Force cookie use for sessions
 		sc.setSessionTrackingModes(EnumSet.of(SessionTrackingMode.COOKIE));
+		
+		//Load the revision number if it exists
+		String version = null;
+		try (InputStream is = sc.getResourceAsStream("META-INF/MANIFEST.MF")){
+			if(is != null){
+				Properties props = new Properties();
+				props.load(is);
+				version = props.getProperty("Implementation-Build");
+			}
+		} catch (IOException e){
+			log.info("Unable to get the app version from the manifest");
+		}
+		if(version == null){
+			version = "DEV BUILD";
+		}
+		
+		sc.setAttribute("version", version);
 	}
 
 }

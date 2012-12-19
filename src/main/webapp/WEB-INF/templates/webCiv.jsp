@@ -65,8 +65,10 @@
       <hr>
 
       <footer>
-        <p>&copy; Christopher Hotchkiss 2012</p>
-        <p>Template Powered by <a href="http://twitter.github.com/bootstrap/">Bootstrap</a> by <a href="https://twitter.com/">Twitter</a></p>
+        <p>
+        	&copy; Christopher Hotchkiss 2012 - Version <c:out value="${version}" /> <br />
+        	Template Powered by <a href="http://twitter.github.com/bootstrap/">Bootstrap</a> by <a href="https://twitter.com/">Twitter</a>
+        </p>
       </footer>
 
     </div><!--/.fluid-container-->
