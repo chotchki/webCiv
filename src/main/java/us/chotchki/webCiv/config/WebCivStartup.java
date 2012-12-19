@@ -53,6 +53,7 @@ public class WebCivStartup implements WebApplicationInitializer {
 		//Secures the application
 		FilterRegistration.Dynamic securityFilterReg = sc.addFilter("securityFilter", new DelegatingFilterProxy("springSecurityFilterChain"));
 		if(securityFilterReg != null){
+			log.debug("Setting up the security intercepter.");
 			securityFilterReg.addMappingForUrlPatterns(null, false, "/*");
 		}
 		
