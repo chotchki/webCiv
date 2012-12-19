@@ -30,7 +30,7 @@
     			<fieldset>
     				<legend>Login Below</legend>
     				<label>Username</label>
-    				<input type="text" name="j_username" placeholder="">
+    				<input type="text" name="j_username" placeholder="" autofocus="autofocus">
     				<label>Password</label>
     				<input type="password" name="j_password" placeholder="">
     				<br />
