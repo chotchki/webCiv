@@ -46,28 +46,6 @@ public class WebCivStartup implements WebApplicationInitializer {
 
 		sc.addListener(new ContextLoaderListener(root));
 		
-		/*//Secures the application
-		FilterRegistration.Dynamic securityFilterReg = sc.addFilter("securityFilter", new DelegatingFilterProxy("springSecurityFilterChain"));
-		if(securityFilterReg != null){
-			log.debug("Setting up the security intercepter.");
-			securityFilterReg.addMappingForUrlPatterns(null, false, "/*");
-		}
-		
-		//Sitemesh Setup
-		FilterRegistration.Dynamic sitemeshReg = sc.addFilter("sitemesh3", ConfigurableSiteMeshFilter.class);
-		if(sitemeshReg != null){
-			sitemeshReg.addMappingForUrlPatterns(null, false, "/*");
-		}
-		
-		//Force UTF-8
-		FilterRegistration.Dynamic charEncodingfilterReg = sc.addFilter("CharacterEncodingFilter", CharacterEncodingFilter.class);
-		if(charEncodingfilterReg != null){
-			charEncodingfilterReg.setInitParameter("encoding", "UTF-8");
-			charEncodingfilterReg.setInitParameter("forceEncoding", "true");
-			charEncodingfilterReg.addMappingForUrlPatterns(null, false, "/*");
-		}*/
-		
-		
 		//Handles requests into the application
 		ServletRegistration.Dynamic appServlet = sc.addServlet("appServlet", new DispatcherServlet(new GenericWebApplicationContext()));
 		if(appServlet != null){
@@ -97,7 +75,6 @@ public class WebCivStartup implements WebApplicationInitializer {
 		if(version == null){
 			version = "DEV BUILD";
 		}
-		
 		sc.setAttribute("version", version);
 	}
 
