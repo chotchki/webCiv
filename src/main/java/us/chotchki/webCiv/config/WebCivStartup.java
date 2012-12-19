@@ -69,7 +69,7 @@ public class WebCivStartup implements WebApplicationInitializer {
 			log.info("Unable to get the app version from the manifest");
 		}
 		if(version == null){
-			version = "DEV BUILD";
+			version = "DevBuild";
 		}
 		sc.setAttribute("version", version);
 	}
