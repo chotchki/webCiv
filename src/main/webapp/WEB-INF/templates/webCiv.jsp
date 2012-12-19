@@ -40,7 +40,7 @@
 				<a class="brand" href="<c:url value="/"/>" >WebCiv</a>
 				<sec:authorize access="isAnonymous()">
 					<p class="navbar-text pull-right">
-						<a href="<c:url value="/login" />" class="navbar-link">Register / Sign in</a>
+						<a href="<c:url value="/signin" />" class="navbar-link">Register / Sign in</a>
 					</p>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">

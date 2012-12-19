@@ -26,11 +26,11 @@
 				<p><a class="btn-auth btn-yahoo" id="yahoo" href="#">Sign in with <b>Yahoo!</b></a></p>
 			</form>-->
 			
-			<form action="<c:url value="/login/form"/>" method="POST">
+			<form action="<c:url value="/signin/authenticate"/>" method="POST">
     			<fieldset>
     				<legend>Login Below</legend>
     				<label>Username</label>
-    				<input type="text" name=j_username" placeholder="">
+    				<input type="text" name="j_username" placeholder="">
     				<label>Password</label>
     				<input type="password" name="j_password" placeholder="">
     				<br />
