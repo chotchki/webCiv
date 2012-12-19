@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title><sitemesh:write property="title">Web Civ!</sitemesh:write></title>
+	<title>Web Civ! - <sitemesh:write property="title" /></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!-- Twitter Bootstrap -->
@@ -16,8 +16,8 @@
         padding: 9px 0;
       }
     </style>
-	<link href="<c:url value="css/bootstrap.min.css" />" rel="stylesheet" />
-	<link rel="shortcut icon" href="<c:url value="img/favicon.ico"/>" />
+	<link href="<c:url value="/css/bootstrap.min.css" />" rel="stylesheet" />
+	<link rel="shortcut icon" href="<c:url value="/img/favicon.ico"/>" />
 	
 	
 	<!-- Make IE work! -->
@@ -45,10 +45,7 @@
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 					<p class="navbar-text pull-right">
-						Signed in as <sec:authentication property="principal.username" />
-					</p>
-					<p class="navbar-text pull-right">
-						<a href="<c:url value="/signout" />" class="navbar-link">Sign Out</a>
+						Signed in as <a href="<c:url value="/profile" />" class="navbar-link"><sec:authentication property="principal.username" /></a>
 					</p>
 				</sec:authorize>
           <div class="nav-collapse collapse">
@@ -74,6 +71,6 @@
     </div><!--/.fluid-container-->
 
 	<!-- Load Javascript last -->
-	<script data-main="<c:url value="js/webCiv"/>" src="<c:url value="js/require.js"/>" ></script>
+	<script data-main="<c:url value="/js/webCiv"/>" src="<c:url value="/js/require.js"/>" ></script>
 </body>
 </html>

@@ -21,11 +21,14 @@
 		
 		<!-- Authorization policy definition: TODO consider replacing with @Secured 
 			on @Controllers -->
-		<intercept-url pattern="/css/**" 	access="permitAll" />
-		<intercept-url pattern="/img/**" 	access="permitAll" />
-		<intercept-url pattern="/js/**" 	access="permitAll" />
+		<intercept-url pattern="/css/**" 		access="permitAll" />
+		<intercept-url pattern="/img/**" 		access="permitAll" />
+		<intercept-url pattern="/js/**" 		access="permitAll" />
 
-		<intercept-url pattern="/**" 		access="permitAll" />
+		<intercept-url pattern="/profile"		access="isAuthenticated()" />
+		<intercept-url pattern="/profile/**"	access="isAuthenticated()" />
+
+		<intercept-url pattern="/**" 			access="permitAll" />
 	</http>
 
 	<authentication-manager alias="authenticationManager">
