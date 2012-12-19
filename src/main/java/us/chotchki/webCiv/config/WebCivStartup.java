@@ -46,18 +46,17 @@ public class WebCivStartup implements WebApplicationInitializer {
 
 		sc.addListener(new ContextLoaderListener(root));
 		
-
-		//Sitemesh Setup
-		FilterRegistration.Dynamic sitemeshReg = sc.addFilter("sitemesh3", ConfigurableSiteMeshFilter.class);
-		if(sitemeshReg != null){
-			sitemeshReg.addMappingForUrlPatterns(null, false, "/*");
-		}
-		
 		//Secures the application
 		FilterRegistration.Dynamic securityFilterReg = sc.addFilter("securityFilter", new DelegatingFilterProxy("springSecurityFilterChain"));
 		if(securityFilterReg != null){
 			log.debug("Setting up the security intercepter.");
 			securityFilterReg.addMappingForUrlPatterns(null, false, "/*");
+		}
+		
+		//Sitemesh Setup
+		FilterRegistration.Dynamic sitemeshReg = sc.addFilter("sitemesh3", ConfigurableSiteMeshFilter.class);
+		if(sitemeshReg != null){
+			sitemeshReg.addMappingForUrlPatterns(null, false, "/*");
 		}
 		
 		//Force UTF-8
