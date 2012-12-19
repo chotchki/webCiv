@@ -46,7 +46,7 @@ public class WebCivStartup implements WebApplicationInitializer {
 
 		sc.addListener(new ContextLoaderListener(root));
 		
-		//Secures the application
+		/*//Secures the application
 		FilterRegistration.Dynamic securityFilterReg = sc.addFilter("securityFilter", new DelegatingFilterProxy("springSecurityFilterChain"));
 		if(securityFilterReg != null){
 			log.debug("Setting up the security intercepter.");
@@ -65,7 +65,7 @@ public class WebCivStartup implements WebApplicationInitializer {
 			charEncodingfilterReg.setInitParameter("encoding", "UTF-8");
 			charEncodingfilterReg.setInitParameter("forceEncoding", "true");
 			charEncodingfilterReg.addMappingForUrlPatterns(null, false, "/*");
-		}
+		}*/
 		
 		
 		//Handles requests into the application
