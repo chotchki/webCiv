@@ -44,6 +44,10 @@ public class InstallerProcess implements ServletContextListener {
 		if (ds == null) {
 			throw new Exception("Lookup failed for the installer using the path " + jndiPath);
 		}
+		install(ds);
+	}
+	
+	public void install(DataSource ds) throws Exception {
 		try (Connection conn = ds.getConnection()){
 			if (conn == null) {
 				throw new Exception("Unable to establish a database connection");
@@ -67,5 +71,6 @@ public class InstallerProcess implements ServletContextListener {
 			InstallerFlag.INSTANCE.enabled.set(false);
 			log.info("Disabled the install filter");
 		}
-	}
+		
+	}	
 }

@@ -10,6 +10,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 import javax.servlet.SessionTrackingMode;
+import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,19 +29,25 @@ public class WebCivStartup implements WebApplicationInitializer {
 	public void onStartup(ServletContext sc) throws ServletException {
 		log.info("Starting up WebCiv!");
 
+		AnnotationConfigWebApplicationContext root = new AnnotationConfigWebApplicationContext();
+		root.setServletContext(sc);
+		root.scan("us.chotchki.webCiv");
+		root.refresh();
+		
+		sc.addListener(new ContextLoaderListener(root));
+
+		//Run the installer
 		log.info("Installing database schema.");
 		InstallerProcess ip = new InstallerProcess();
 		try {
-			ip.install("jdbc/webCiv");
+			DataSource ds = (DataSource) root.getBean("dataSource");
+			ip.install(ds);
 		} catch (Exception e) {
 			log.error("Install process failed", e);
 			throw new ServletException(e);
 		}
-
-		AnnotationConfigWebApplicationContext root = new AnnotationConfigWebApplicationContext();
-		root.scan("us.chotchki.webCiv");
-
-		sc.addListener(new ContextLoaderListener(root));
+		
+		
 		
 		//Handles requests into the application
 		ServletRegistration.Dynamic appServlet = sc.addServlet("appServlet", new DispatcherServlet(new GenericWebApplicationContext()));
