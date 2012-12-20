@@ -7,9 +7,12 @@ import javax.sql.DataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
+@EnableTransactionManagement
 public class DaoConfig {
 	private static final String jndiPath = "jdbc/webCiv";
 	
@@ -26,7 +29,14 @@ public class DaoConfig {
 	
 	@Bean
 	public SessionFactory sessionFactory(DataSource ds){
-		return new LocalSessionFactoryBuilder(ds)
-		.buildSessionFactory();
+		LocalSessionFactoryBuilder lsfb = new LocalSessionFactoryBuilder(ds);
+		lsfb.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL82Dialect");
+		lsfb.scanPackages("us.chotchki.webCiv.db.pojo");
+		return lsfb.buildSessionFactory();
+	}
+	
+	@Bean(name = "transactionManager")
+	public HibernateTransactionManager transaction(SessionFactory sf){
+		return new HibernateTransactionManager(sf);
 	}
 }

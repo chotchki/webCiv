@@ -19,12 +19,12 @@
 	</properties>
 	<dependencies>
 		<!-- Logging -->
+		
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${org.slf4j-version}</version>
-		</dependency>
-		<dependency>
+		</dependency><dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
 			<version>${org.slf4j-version}</version>
@@ -60,6 +60,12 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
      		<version>${org.springframework-version}</version>
+     		<exclusions>
+     			<exclusion>
+     				<artifactId>commons-logging</artifactId>
+     				<groupId>commons-logging</groupId>
+     			</exclusion>
+     		</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -80,6 +86,11 @@
 			</exclusions>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
 			<version>${org.springframework.security-version}</version>
@@ -88,6 +99,12 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-openid</artifactId>
 			<version>${org.springframework.security-version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
