@@ -56,7 +56,7 @@ public class Register {
 			return "redirect:/signin";
 		}
 		
-		if(rf.getRetypePassword().equals(rf.getUser().getPassword())){
+		if(!rf.getRetypePassword().equals(rf.getUser().getPassword())){
 			redirect.addFlashAttribute("errorRetypePassword", "The password and the retype password must match.");
 			return "redirect:/signin";
 		}
