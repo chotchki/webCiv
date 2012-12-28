@@ -1,10 +1,16 @@
 package us.chotchki.webCiv.web;
 
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -17,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import us.chotchki.webCiv.db.pojo.Player;
 import us.chotchki.webCiv.db.pojo.User;
 import us.chotchki.webCiv.form.pojo.RegistrationForm;
+import us.chotchki.webCiv.security.SHA512PasswordEncoder;
 import us.chotchki.webCiv.service.PlayerService;
 
 @Controller
@@ -66,7 +73,15 @@ public class Register {
 		
 		User u = new User();
 		u.setUsername(rf.getUser().getUsername());
+		u.setPassword(rf.getUser().getPassword());
 		
+		playerService.register(p, u);
+		redirect.addFlashAttribute("successRegister", "Welcome to WebCiv " + rf.getUser().getUsername() + "!");
+		
+		//Spring log us in
+		Authentication auth = new UsernamePasswordAuthenticationToken(u.getUsername(), u.getPassword());
+		SecurityContextHolder.getContext().setAuthentication(auth);
+		 
 		return "redirect:/";
 	}
 }

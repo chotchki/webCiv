@@ -5,6 +5,11 @@
 </head>
 <body>
 	<div class="row-fluid">
+		<c:if test="${not empty successRegister}">
+		<div class="alert alert-success">
+			<c:out value="${successRegister}" />
+		</div>
+		</c:if>
 		<div class="hero-unit">
 			<h1>Conquer Your Planet and Beyond!</h1>
 			<br />

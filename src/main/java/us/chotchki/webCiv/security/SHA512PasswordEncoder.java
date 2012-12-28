@@ -17,7 +17,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
+@Service
 public class SHA512PasswordEncoder implements PasswordEncoder {
 	protected Logger log = LoggerFactory.getLogger(this.getClass());
 	private int iterations;

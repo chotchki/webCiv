@@ -5,11 +5,13 @@ import java.math.BigInteger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
+@Table(name = "webciv.user")
 public class User {
 	@Id
 	@NotBlank(message="Username must not be blank")
@@ -18,7 +20,7 @@ public class User {
 	
 	@Column
 	@NotBlank(message="Password cannot be blank")
-	@Length(min=6, max=100, message="Password must be between 6 and 100 characters")
+	@Length(min=6, max=200, message="Password must be between 6 and 200 characters")
 	private String password = null;
 	
 	@Column
