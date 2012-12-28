@@ -10,6 +10,8 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
+import org.joda.time.DateTime;
+import org.joda.time.Interval;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
@@ -18,8 +20,34 @@ import org.springframework.security.authentication.encoding.PasswordEncoder;
 
 public class SHA512PasswordEncoder implements PasswordEncoder {
 	protected Logger log = LoggerFactory.getLogger(this.getClass());
-	private final int iterations = 200000;
+	private int iterations;
 	private final String algorithum = "HmacSHA512";
+	
+	public SHA512PasswordEncoder() throws NoSuchAlgorithmException, InvalidKeyException{
+		//Start by benchmarking the iterations - we want to hit between .5 and .6 secs
+		SecretKey testKey = createKey();
+
+		//We'll start with a reasonable number, we'll time it and try to guess how far we should move the next test
+		long duration = 0;
+		iterations = 40000;
+		int loop = 0;
+		while(duration < 500 || duration > 600){
+			DateTime start = new DateTime();
+			calculateHash(testKey, iterations, "test");
+			DateTime end = new DateTime();
+			Interval interval = new Interval(start, end);
+			duration = interval.toDurationMillis();
+			if(duration > 600){
+				iterations = (int) (iterations - (iterations * .3));
+				log.debug("DOWN");
+			} else if (duration < 500){
+				iterations = (int) (iterations + (iterations * .3));
+				log.debug("UP");
+			}
+			loop++;
+		}
+		log.debug("Hash iterations are set to {} taking {} millisecs and {} loops", iterations, duration, loop);
+	}
 
 	@Override
 	public String encodePassword(String rawPassword, Object salt)
@@ -27,9 +55,7 @@ public class SHA512PasswordEncoder implements PasswordEncoder {
 		StringBuilder password = new StringBuilder("1$" + iterations + "$");
 
 		try {
-			KeyGenerator keygen = KeyGenerator.getInstance(algorithum);
-			keygen.init(512);
-			SecretKey hmac_key = keygen.generateKey();
+			SecretKey hmac_key = createKey();
 
 			password.append(Base64.encodeBase64URLSafeString(hmac_key
 					.getEncoded()));
@@ -95,5 +121,11 @@ public class SHA512PasswordEncoder implements PasswordEncoder {
 			hasher.update(hmacs.get(i));
 		}
 		return Base64.encodeBase64URLSafeString(hasher.doFinal());
+	}
+	
+	private SecretKey createKey() throws NoSuchAlgorithmException{
+		KeyGenerator keygen = KeyGenerator.getInstance(algorithum);
+		keygen.init(512);
+		return keygen.generateKey();
 	}
 }
