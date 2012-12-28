@@ -25,7 +25,12 @@
 				<p><a class="btn-auth btn-google" id="google" href="#">Sign in with <b>Google</b></a></p>
 				<p><a class="btn-auth btn-yahoo" id="yahoo" href="#">Sign in with <b>Yahoo!</b></a></p>
 			</form>-->
-			
+			<c:if test="${not empty loginFailed}">
+			<div class="alert alert-error">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<c:out value="${loginFailed}" />
+			</div>
+			</c:if>
 			<form action="<c:url value="/signin/authenticate"/>" method="POST">
     			<fieldset>
     				<legend>Login Below</legend>

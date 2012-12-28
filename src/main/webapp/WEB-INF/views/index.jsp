@@ -7,6 +7,7 @@
 	<div class="row-fluid">
 		<c:if test="${not empty successRegister}">
 		<div class="alert alert-success">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
 			<c:out value="${successRegister}" />
 		</div>
 		</c:if>

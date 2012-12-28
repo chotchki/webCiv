@@ -10,4 +10,10 @@ public class Signin {
 	public String index(Model m){
 		return "signin";
 	}
+	
+	@RequestMapping("/signin/failed")
+	public String failed(Model m){
+		m.addAttribute("loginFailed", "Login Failed");
+		return index(m);
+	}
 }
