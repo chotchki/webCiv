@@ -15,7 +15,12 @@
 			<h1>Conquer Your Planet and Beyond!</h1>
 			<br />
 			<br />
-            <p><a class="btn btn-primary btn-large">Play &raquo;</a></p>
+			<sec:authorize access="isAnonymous()">
+				<p><a href="<c:url value="/signin" />" class="btn btn-primary btn-large">Register / Sign in</a></p>
+			</sec:authorize>
+			<sec:authorize access="isAuthenticated()">
+            	<p><a class="btn btn-primary btn-large">Play &raquo;</a></p>
+            </sec:authorize>
           </div>
 	</div>
 </body>
