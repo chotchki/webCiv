@@ -16,7 +16,7 @@
         padding: 9px 0;
       }
     </style>
-	<link href="<c:url value="/css/bootstrap.min.css" />" rel="stylesheet" />
+	<link href="<c:url value="/css/bootstrap.min.css?${version}" />" rel="stylesheet" />
 	<link rel="shortcut icon" href="<c:url value="/img/favicon.ico"/>" />
 	
 	
@@ -71,6 +71,6 @@
     </div><!--/.fluid-container-->
 
 	<!-- Load Javascript last -->
-	<script data-main="<c:url value="/js/webCiv"/>" src="<c:url value="/js/require.js"/>" ></script>
+	<script data-main="<c:url value="/js/webCiv"/>" src="<c:url value="/js/require.js?${version}"/>" ></script>
 </body>
 </html>
