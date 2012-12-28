@@ -41,10 +41,8 @@ public class SHA512PasswordEncoder implements PasswordEncoder {
 			duration = interval.toDurationMillis();
 			if(duration > 600){
 				iterations = (int) (iterations - (iterations * .3));
-				log.debug("DOWN");
 			} else if (duration < 500){
 				iterations = (int) (iterations + (iterations * .3));
-				log.debug("UP");
 			}
 			loop++;
 		}
