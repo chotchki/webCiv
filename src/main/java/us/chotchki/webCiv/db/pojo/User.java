@@ -6,12 +6,19 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 public class User {
 	@Id
+	@NotBlank(message="Username must not be blank")
+	@Length(min=2, max=50,message="Username name can be between 2 and 50 characters")
 	private String username = null;
 	
 	@Column
+	@NotBlank(message="Password cannot be blank")
+	@Length(min=6, max=100, message="Password must be between 6 and 100 characters")
 	private String password = null;
 	
 	@Column

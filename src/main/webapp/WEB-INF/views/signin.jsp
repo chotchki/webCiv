@@ -40,15 +40,28 @@
 		</div>
 		
 		<div class="span3 offset1">
-			<form action="<c:url value="/login/form"/>" method="POST">
+			<form action="<c:url value="/register"/>" method="POST">
     			<fieldset>
     				<legend>Register</legend>
-    				<label>Username</label>
-    				<input type="text" name="username" placeholder="">
-    				<label>Password</label>
-    				<input type="password" name="password" placeholder="">
-    				<label>Retype Password</label>
-    				<input type="password" name="confirmpassword" placeholder="">
+    				<span class="help-block"><c:out value="${error}" /></span>
+    				<div class="control-group <c:if test="${not empty errorUsername}">error</c:if>">
+    					<label>Username</label>
+    					<input type="text" name="user.username" placeholder="">
+    					<span class="help-block"><c:out value="${errorUsername}" /></span>
+    					<br />
+    				</div>
+    				
+    				<div class="control-group <c:if test="${(not empty errorPassword) or (not empty errorRetypePassword)}">error</c:if>">
+    					<label>Password</label>
+    					<input type="password" name="user.password" placeholder="">
+    					<span class="help-block"><c:out value="${errorPassword}" /></span>
+    					<br />
+    					
+    					<label>Retype Password</label>
+    					<input type="password" name="retypePassword" placeholder="">
+    					<span class="help-block"><c:out value="${errorRetypePassword}" /></span>
+    				</div>
+    				
     				<br />
     				<button type="submit" class="btn">Submit</button>
     			</fieldset>

@@ -15,10 +15,6 @@ public class Index {
 	
 	@RequestMapping("/")
 	public String index(){
-		Player p = new Player();
-		p.setNickname("Foo");
-		playerService.create(p);
-		
 		return "index";
 	}
 }
