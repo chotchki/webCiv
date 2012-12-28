@@ -1,10 +1,8 @@
 package us.chotchki.webCiv.web;
 
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-
 import javax.validation.Valid;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +21,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import us.chotchki.webCiv.db.pojo.Player;
 import us.chotchki.webCiv.db.pojo.User;
 import us.chotchki.webCiv.form.pojo.RegistrationForm;
-import us.chotchki.webCiv.security.SHA512PasswordEncoder;
 import us.chotchki.webCiv.service.PlayerService;
 
 @Controller
@@ -36,6 +33,12 @@ public class Register {
 	@RequestMapping("/register/available")
 	public @ResponseBody String available(@RequestParam("nickname") String nickname){
 		return nickname;
+	}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String registerGet(RedirectAttributes redirect){
+		redirect.addFlashAttribute("error", "There was an error registering, please try again.");
+		return "redirect:/signin";
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -75,7 +78,15 @@ public class Register {
 		u.setUsername(rf.getUser().getUsername());
 		u.setPassword(rf.getUser().getPassword());
 		
-		playerService.register(p, u);
+		try {
+			playerService.register(p, u);
+		} catch (ConstraintViolationException e){
+			redirect.addFlashAttribute("error", "There was an error registering, this username has already been claimed.");
+			return "redirect:/signin";
+		} catch (Exception e){
+			redirect.addFlashAttribute("error", "There was an error registering, please try again later.");
+			return "redirect:/signin";
+		}
 		redirect.addFlashAttribute("successRegister", "Welcome to WebCiv " + rf.getUser().getUsername() + "!");
 		
 		//Spring log us in
