@@ -9,4 +9,8 @@ public class UserDao extends ParentDao {
 	public void create(User u){
 		getSession().save(u);
 	}
+	
+	public User getByUsername(String username){
+		return (User) getSession().byId(User.class).load(username);
+	}
 }

@@ -32,10 +32,11 @@
 	</http>
 
 	<authentication-manager alias="authenticationManager">
-		<authentication-provider>
-			<user-service>
-				<user name="test" password="test" authorities="ROLE_USER" />
-			</user-service>
-		</authentication-provider>
+		<authentication-provider ref="daoAuthenticationProvider" />
 	</authentication-manager>
+	
+	<beans:bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+		<beans:property name="userDetailsService" ref="userDetailsServiceImpl"/>
+		<beans:property name="passwordEncoder" ref="SHA512PasswordEncoder"/>
+	</beans:bean> 
 </beans:beans>
